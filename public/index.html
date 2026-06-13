@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#101414">
+    <meta name="color-scheme" content="dark">
+    <title>Claude 手机控制台</title>
+    <link rel="manifest" href="/manifest.webmanifest">
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">LOCAL CONTROL</p>
+          <h1>Claude 控制台</h1>
+        </div>
+        <button id="new-session" class="quiet-button" type="button">新会话</button>
+      </header>
+
+      <section class="connection-card" aria-live="polite">
+        <div class="status-row">
+          <span id="status-dot" class="status-dot"></span>
+          <strong id="connection-status">正在连接电脑...</strong>
+        </div>
+        <p id="workspace" class="workspace">读取工作目录</p>
+      </section>
+
+      <section id="pairing-panel" class="pairing-panel" hidden>
+        <p>输入电脑启动窗口中显示的访问码</p>
+        <div class="pairing-form">
+          <label class="sr-only" for="pairing-code">访问码</label>
+          <input
+            id="pairing-code"
+            type="password"
+            inputmode="text"
+            autocomplete="current-password"
+            maxlength="64"
+            placeholder="输入访问码"
+          >
+          <button id="pair-button" class="send-button" type="button">连接电脑</button>
+        </div>
+        <span id="pair-error" class="pair-error" aria-live="polite"></span>
+      </section>
+
+      <section id="empty-state" class="empty-state">
+        <div class="terminal-mark">&gt;_</div>
+        <h2>从手机给这台电脑布置任务</h2>
+        <p>描述目标、相关文件和完成标准。Claude 会在上方显示的工作目录中执行。</p>
+        <div class="suggestions">
+          <button type="button" data-prompt="检查这个项目，修复当前测试失败的问题，并运行测试验证。">修复测试</button>
+          <button type="button" data-prompt="阅读当前项目，告诉我它的结构、启动方法和主要风险。">了解项目</button>
+          <button type="button" data-prompt="查看当前工作目录中的未提交改动，做一次代码审查，只报告明确的问题。">代码审查</button>
+        </div>
+      </section>
+
+      <section id="conversation" class="conversation" aria-live="polite"></section>
+
+      <section class="composer-panel">
+        <div class="mode-row">
+          <label for="mode">权限</label>
+          <select id="mode">
+            <option value="safe">安全模式：仅工作区文件</option>
+            <option value="autonomous">自主模式：允许执行命令</option>
+          </select>
+        </div>
+        <label class="sr-only" for="prompt">给 Claude 的任务</label>
+        <textarea
+          id="prompt"
+          rows="3"
+          maxlength="20000"
+          placeholder="例如：打开项目，修复登录页的报错并运行测试..."
+        ></textarea>
+        <div class="composer-actions">
+          <span id="task-state">准备就绪</span>
+          <button id="stop" class="stop-button" type="button" hidden>停止</button>
+          <button id="send" class="send-button" type="button">发送任务</button>
+        </div>
+      </section>
+    </main>
+
+    <template id="message-template">
+      <article class="message">
+        <div class="message-label"></div>
+        <div class="message-body"></div>
+      </article>
+    </template>
+
+    <script src="/app.js" defer></script>
+  </body>
+</html>

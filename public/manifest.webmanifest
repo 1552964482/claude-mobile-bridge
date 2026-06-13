@@ -1,0 +1,9 @@
+{
+  "name": "Claude 手机控制台",
+  "short_name": "Claude 控制台",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0b0e0e",
+  "theme_color": "#101414",
+  "lang": "zh-CN"
+}

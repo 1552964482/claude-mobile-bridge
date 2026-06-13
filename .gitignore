@@ -1,0 +1,12 @@
+# 依赖
+node_modules/
+
+# 日志
+*.log
+
+# 二进制工具（用户需自行下载）
+tools/cloudflared.exe
+
+# 系统文件
+.DS_Store
+Thumbs.db
